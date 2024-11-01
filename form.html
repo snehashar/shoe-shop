@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up Form</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="flex items-center justify-center min-h-screen bg-gray-100">
+
+    <div class="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+        <h2 class="text-2xl font-bold text-center text-gray-700">Create an Account</h2>
+        
+        <form class="space-y-4">
+            <!-- Full Name -->
+            <div>
+                <label for="name" class="block text-sm font-medium text-gray-600">Full Name</label>
+                <input type="text" id="name" name="name" required 
+                       class="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
+            </div>
+            
+            <!-- Email -->
+            <div>
+                <label for="email" class="block text-sm font-medium text-gray-600">Email Address</label>
+                <input type="email" id="email" name="email" required 
+                       class="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
+            </div>
+            
+            <!-- Password -->
+            <div>
+                <label for="password" class=" text-sm font-medium text-gray-600">Password</label>
+                <input type="password" id="password" name="password" required 
+                       class="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
+            </div>
+            
+            <!-- Confirm Password -->
+            <div>
+                <label for="confirm-password" class="block text-sm font-medium text-gray-600">Confirm Password</label>
+                <input type="password" id="confirmpassword" name="confirm-password" required 
+                       class="w-full px-4 py-2 mt-2 text-gray-700 bg-gray-100 border rounded-md focus:border-blue-400 focus:ring-1 focus:ring-blue-400 focus:outline-none">
+            </div>
+            
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" 
+                        class="submitbtn w-full px-4 py-2 font-semibold text-white bg-blue-500 rounded-md hover:bg-blue-600 focus:bg-blue-700 focus:outline-none">
+                    Sign Up
+                </button>
+            </div>
+            <button type="button" class="closebtn bg-black text-white w-20 h-10 flex items-center justify-center border-none rounded-md shadow-xl">Close</button>
+        </form>
+        
+        <!-- Login Redirect -->
+        <p class="text-sm text-center text-gray-600">
+            Already have an account? 
+            <a href="#" class="loginlink text-blue-500 hover:underline">Log in</a>
+        </p>
+    </div>
+
+    <script>
+        const closebtn = document.querySelector(".closebtn");
+        closebtn.addEventListener("click", () => {
+            window.location.href = "index.html";
+        });
+
+        const form = document.getElementById("signupForm");
+        form.addEventListener("submit", (event) => {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById("username").value;
+            const name = document.getElementById("name").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+                return; // Exit the function if passwords don't match
+            }
+
+            // Store data in local storage
+            const userData = {
+                username: username,
+                name: name,
+                email: email,
+                password: password // Note: Storing passwords in local storage is not secure
+            };
+
+            localStorage.setItem("userData", JSON.stringify(userData));
+            alert("Sign up successful! Your data has been stored in local storage.");
+            console.log("User data stored:", userData);
+
+            // Optionally, you can redirect or clear the form
+            form.reset(); // Clear the form
+            window.location.href = "index.html"; // Redirect after successful signup
+        });
+       
+    </script>
+</body>
+</html>
